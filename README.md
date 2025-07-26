@@ -1,1 +1,1 @@
-# LegalSummariser
+﻿# Legal Document Mini Project
