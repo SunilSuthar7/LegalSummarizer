@@ -16,4 +16,3 @@ else:
     print(data[entry_id]['input_text'])
     print("\n📝 Summary:\n")
     print(data[entry_id]['summary_text'])
- u pt this code in my valiation file n check
