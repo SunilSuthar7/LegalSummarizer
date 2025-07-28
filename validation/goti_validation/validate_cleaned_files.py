@@ -1,9 +1,10 @@
 import json
 import os
 
-# Corrected relative file paths from /validation/ to /data/
-inabs_path = os.path.join("..", "sample_cleaned_inabs.json")
-ilc_path = os.path.join("..", "sample_cleaned_ilc.json")
+# Corrected relative file paths from /validation/goti_validation/ to /data/
+base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+inabs_path = os.path.join(base_dir, "data", "sample_cleaned_inabs.json")
+ilc_path = os.path.join(base_dir, "data", "sample_cleaned_ilc.json")
 
 def load_json(file_path):
     try:
