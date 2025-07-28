@@ -3,7 +3,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
-# Download required NLTK data (only once)
+# Download required NLTK data (runs only once)
 nltk.download("punkt")
 nltk.download("stopwords")
 
@@ -32,7 +32,6 @@ def clean_text(text: str, aggressive: bool = False) -> str:
     if not isinstance(text, str):
         return ""
 
-    # Base cleaning (always applied)
     text = text.replace('\n', ' ')
     text = normalize_quotes(text)
     text = remove_legal_headers(text)

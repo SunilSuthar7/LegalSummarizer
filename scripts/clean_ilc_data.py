@@ -18,7 +18,7 @@ train_split = dataset["train"]
 
 print(f"📊 Total records in ILC: {len(train_split)}")
 
-# Clean all entries using team-wide cleaner.py
+# Clean all entries using shared cleaner
 cleaned = []
 
 for idx in tqdm(range(len(train_split)), desc="🧼 Cleaning full ILC dataset"):
@@ -36,7 +36,7 @@ for idx in tqdm(range(len(train_split)), desc="🧼 Cleaning full ILC dataset"):
             "summary_text": cleaned_summary
         })
 
-# Save only JSON
+# Save JSON output (no CSV)
 with open("data/sample_cleaned_ilc.json", "w", encoding="utf-8") as f:
     json.dump(cleaned, f, indent=2, ensure_ascii=False)
 
