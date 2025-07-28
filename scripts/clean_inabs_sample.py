@@ -3,36 +3,36 @@ import os
 
 # Add root directory to Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from datasets import load_dataset
 from src.cleaner import clean_text
 import pandas as pd
 from tqdm import tqdm
-import os
 
-# Create output directory
+# Create output directory if not exists
 os.makedirs("data", exist_ok=True)
 
-# Load dataset
-print("Loading IN-ABS dataset...")
+# Load full IN-ABS dataset
+print(" Loading full IN-ABS dataset...")
 dataset = load_dataset("percins/IN-ABS")
 train_split = dataset["train"]
 
-# We'll process only the first 100 samples
-sample_cleaned = []
-
-print("Cleaning samples...")
-for idx in tqdm(range(100), desc="Cleaning sample"):
+# Clean all samples
+cleaned_all = []
+print("Cleaning full dataset...")
+for idx in tqdm(range(len(train_split)), desc="Cleaning"):
     raw = train_split[idx]
     cleaned = {
         "id": idx,
-        "input_text": clean_text(raw["text"]),               # Safe readable mode
+        "input_text": clean_text(raw["text"]),
         "summary_text": clean_text(raw["summary"])
     }
-    sample_cleaned.append(cleaned)
+    cleaned_all.append(cleaned)
 
-# Save to JSON only
-output_path = "data/sample_cleaned_inabs.json"
-df = pd.DataFrame(sample_cleaned)
+# Save to JSON
+output_path = "data/cleaned_inabs.json"
+df = pd.DataFrame(cleaned_all)
 df.to_json(output_path, orient="records", indent=2, force_ascii=False)
 
-print(f" Cleaned data saved to → {output_path}")
+print(f"\nFull cleaned IN-ABS data saved to → {output_path}")
+print(f"Total entries cleaned: {len(cleaned_all)}")
