@@ -3,7 +3,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
-# Download required NLTK data (only once)
+# Download required NLTK data (runs only once)
 nltk.download("punkt")
 nltk.download("stopwords")
 
@@ -20,8 +20,6 @@ def remove_legal_headers(text):
 
 def remove_special_characters(text):
     return re.sub(r"[^\w\s.,;:]", "", text)
-<<<<<<< HEAD
-=======
 
 def standardize_spacing(text):
     return re.sub(r"\s{2,}", " ", text)
@@ -34,31 +32,6 @@ def clean_text(text: str, aggressive: bool = False) -> str:
     if not isinstance(text, str):
         return ""
 
-    # Base cleaning (always applied)
-    text = text.replace('\n', ' ')
-    text = normalize_quotes(text)
-    text = remove_legal_headers(text)
-    text = remove_case_numbers(text)
-    text = standardize_spacing(text)
-
-    if aggressive:
-        text = text.lower()
-        text = remove_special_characters(text)
-        text = remove_stopwords(text)
->>>>>>> origin/main
-
-def standardize_spacing(text):
-    return re.sub(r"\s{2,}", " ", text)
-
-def remove_stopwords(text, lang="english"):
-    words = word_tokenize(text)
-    return " ".join(w for w in words if w.lower() not in stopwords.words(lang))
-
-def clean_text(text: str, aggressive: bool = False) -> str:
-    if not isinstance(text, str):
-        return ""
-
-    # Base cleaning (always applied)
     text = text.replace('\n', ' ')
     text = normalize_quotes(text)
     text = remove_legal_headers(text)
