@@ -5,3 +5,4 @@ data/raw/
 *.csv
 *.xlsx
 .env
+data/cleaned_inabs.json
