@@ -28,3 +28,11 @@ def remove_punctuation(tokens):
         return []
 
     return [token for token in tokens if token not in string.punctuation]
+
+
+def tokenize_text(text):
+    """
+    Tokenizes and cleans text using NLTK, removing punctuation.
+    """
+    tokens = word_tokenize_nltk(text)
+    return remove_punctuation(tokens)
