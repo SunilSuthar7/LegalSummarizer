@@ -6,3 +6,5 @@ data/raw/
 *.xlsx
 .env
 data/cleaned_inabs.json
+data/tokenized_inabs.json
+data/tokenized_ilc.json
