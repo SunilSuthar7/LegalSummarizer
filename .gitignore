@@ -6,5 +6,11 @@ data/raw/
 *.xlsx
 .env
 data/cleaned_inabs.json
+data/cleaned_ilc.json
 data/tokenized_inabs.json
 data/tokenized_ilc.json
+venv/
+data/extractive_summary_ilc.json
+data/extractive_summary_inabs.json
+data/legalbert_ready/
+data/summaries_legalbert_ready/
