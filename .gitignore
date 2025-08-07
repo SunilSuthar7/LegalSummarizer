@@ -13,4 +13,4 @@ venv/
 data/extractive_summary_ilc.json
 data/extractive_summary_inabs.json
 data/legalbert_ready/
-data/summaries_legalbert_ready/
+data/summaries_legalbert/
