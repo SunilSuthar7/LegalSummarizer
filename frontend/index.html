@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Text Summarizer</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Added professional header with legal theme -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="10,9 9,9 8,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1>Legal Text Summarizer</h1>
+      </div>
+      <p class="subtitle">AI-Powered Legal Document Analysis & Summarization</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="controls-card">
+      <h2>Configuration</h2>
+      <div class="controls">
+        <div class="form-group">
+          <label for="dataset">Dataset:</label>
+          <select id="dataset" class="select-input">
+            <option value="ILC">ILC (Indian Legal Cases)</option>
+            <option value="IN-ABS">IN-ABS (Indian Abstracts)</option>
+          </select>
+        </div>
+
+        <!-- Updated number of entries to 1-5 options only -->
+        <div class="form-group">
+          <label for="numEntries">Number of Entries:</label>
+          <select id="numEntries" class="select-input">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="entryId">Specific Entry ID (optional):</label>
+          <input type="number" id="entryId" class="text-input" min="1" placeholder="Enter specific entry ID">
+          <small class="help-text">If specified, number of entries will be ignored</small>
+        </div>
+
+        <div class="form-group">
+          <label for="fileInput">Upload JSON (optional):</label>
+          <input type="file" id="fileInput" class="file-input" accept=".json">
+        </div>
+
+        <button id="runBtn" class="run-button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="5,3 19,12 5,21" fill="currentColor"/>
+          </svg>
+          Run Pipeline
+        </button>
+      </div>
+    </div>
+
+    <div class="progress-card">
+      <h2>Pipeline Progress</h2>
+      <div class="progress-container">
+        <div class="progress-item">
+          <label>Data Cleaning</label>
+          <div class="progress-bar"><div class="progress-fill" id="fillCleaning"></div></div>
+        </div>
+        <div class="progress-item">
+          <label>Text Chunking</label>
+          <div class="progress-bar"><div class="progress-fill" id="fillChunking"></div></div>
+        </div>
+        <div class="progress-item">
+          <label>Summarization</label>
+          <div class="progress-bar"><div class="progress-fill" id="fillSummarization"></div></div>
+        </div>
+        <div class="progress-item">
+          <label>Evaluation</label>
+          <div class="progress-bar"><div class="progress-fill" id="fillEvaluation"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="error" id="error" style="display:none;"></div>
+    <div class="results-card" id="results"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

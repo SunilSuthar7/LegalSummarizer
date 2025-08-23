@@ -1,12 +1,18 @@
 import sys
 import os
+import argparse
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from datasets import load_dataset
 from src.cleaner import clean_text
-import pandas as pd
 from tqdm import tqdm
 import json
+
+# Argument parsing
+parser = argparse.ArgumentParser()
+parser.add_argument("--n", type=int, default=None, help="Number of entries to process")
+parser.add_argument("--ids", nargs="+", type=int, help="Specific entry IDs to process")
+args = parser.parse_args()
 
 # Create output directory
 os.makedirs("data", exist_ok=True)
@@ -16,12 +22,21 @@ print("📦 Loading ILC dataset...")
 dataset = load_dataset("d0r1h/ILC")
 train_split = dataset["train"]
 
-print(f"📊 Total records in ILC: {len(train_split)}")
+# Determine entries to process
+all_indices = list(range(len(train_split)))
+if args.ids:
+    indices_to_process = [i for i in args.ids if i < len(train_split)]
+elif args.n:
+    indices_to_process = all_indices[:args.n]
+else:
+    indices_to_process = all_indices
 
-# Clean all entries using shared cleaner
+print(f"📊 Total records to process: {len(indices_to_process)}")
+
+# Clean entries
 cleaned = []
 
-for idx in tqdm(range(len(train_split)), desc=" Cleaning full ILC dataset"):
+for idx in tqdm(indices_to_process, desc="Cleaning ILC dataset"):
     raw = train_split[idx]
     raw_input = raw.get("Case", "")
     raw_summary = raw.get("Summary", "")
@@ -36,8 +51,9 @@ for idx in tqdm(range(len(train_split)), desc=" Cleaning full ILC dataset"):
             "summary_text": cleaned_summary
         })
 
-# Save JSON output (no CSV)
-with open("data/cleaned_ilc.json", "w", encoding="utf-8") as f:
+# Save JSON output
+output_file = "data/cleaned_ilc.json"
+with open(output_file, "w", encoding="utf-8") as f:
     json.dump(cleaned, f, indent=2, ensure_ascii=False)
 
-print("✅ Cleaned ILC dataset saved to → data/sample_cleaned_ilc.json")
+print(f"✅ Cleaned ILC dataset saved to → {output_file}")

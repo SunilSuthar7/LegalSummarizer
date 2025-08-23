@@ -1,0 +1,12 @@
+torch==2.5.1           --index-url https://download.pytorch.org/whl/cpu
+transformers>=4.41,<5
+datasets>=2.14,<3
+evaluate>=0.4.2
+rouge_score>=0.1.2
+sentencepiece>=0.1.99
+accelerate>=0.26
+tqdm
+numpy
+pandas
+protobuf>=3.20
+streamlit>=1.33
